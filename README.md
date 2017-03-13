@@ -19,12 +19,14 @@ Release notes/descriptions for the original project posted on the previous Aras 
 
 Release | Notes
 --------|--------
+[v2.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v2.0) | VisualStudio 2008 sample project (v2)
 [v1.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v1.0) | VisualStudio 2008 sample project (v1)
 
 #### Supported Aras Versions
 
 Project | Aras
 --------|------
+[v2.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v2.0) | Aras 8.1-9.1 SP4
 [v1.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v1.0) | Aras 8.1-9.1 SP4
 
 > ###### *Please note: Aras Community Projects are provided on an "as-is" basis.*
