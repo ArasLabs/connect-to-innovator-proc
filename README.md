@@ -19,6 +19,7 @@ Release notes/descriptions for the original project posted on the previous Aras 
 
 Release | Notes
 --------|--------
+[v3.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v3.0) | VisualStudio 2008 sample project (v3)
 [v2.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v2.0) | VisualStudio 2008 sample project (v2)
 [v1.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v1.0) | VisualStudio 2008 sample project (v1)
 
@@ -26,6 +27,7 @@ Release | Notes
 
 Project | Aras
 --------|------
+[v3.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v3.0) | Aras 9.1 SP5
 [v2.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v2.0) | Aras 8.1-9.1 SP4
 [v1.0](https://github.com/ArasLabs/connect-to-innovator-proc/releases/tag/v1.0) | Aras 8.1-9.1 SP4
 

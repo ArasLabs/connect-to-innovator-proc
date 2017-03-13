@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Reflection;
+using Microsoft.Win32;
 
 namespace InnovatorHelper
 {
@@ -27,8 +28,13 @@ namespace InnovatorHelper
         // IDs exist in the Innovator that the sample is connecting to.
         // In order to try please replace item IDs (and optionally type) on ones you would like to open
         public static string OpenItemType = "Part";
-        public static string OpenItemID_1 = "8EBDEAE57ADA4D4A8EE3C9CB9CDBE13C";
-        public static string OpenItemID_2 = "218F48BEC9C94401849FE84AEEBE66CE";
+				public static string OpenItemID_1 = "8EBDEAE57ADA4D4A8EE3C9CB9CDBE13C";
+				public static string OpenItemID_2 = "218F48BEC9C94401849FE84AEEBE66CE";
+
+				//Registry Settings
+				private const string TabProcGrowth_RegistryPath = @"SOFTWARE\Microsoft\Internet Explorer\Main";
+				private const string TabProcGrowth_Name = "TabProcGrowth";
+
 
         // For connecting to existing Innovator only the URL must be specified in UI.
         // For opening a new Innovator the URL and db name must be specified in UI; specified
@@ -221,7 +227,7 @@ namespace InnovatorHelper
 
         private static bool WaitForOriginalIEClose()
         {
-            if (origHWND == 0)
+            if (!IsNeedWaitForOriginalIEClose() || origHWND == 0)
                 return true;
 
             int elapsedSeconds = 0;
@@ -269,6 +275,27 @@ namespace InnovatorHelper
             }
         }
 
+				private static bool IsNeedWaitForOriginalIEClose()
+				{
+					using (RegistryKey ieMain = Registry.CurrentUser.OpenSubKey(
+			 TabProcGrowth_RegistryPath, false))
+					{
+						object regValue = ieMain.GetValue(TabProcGrowth_Name);
+						if (regValue == null)
+							return true;
+						RegistryValueKind valueKind = ieMain.GetValueKind(TabProcGrowth_Name);
+						if (valueKind == RegistryValueKind.DWord && (int)regValue == 0)
+						{
+							return false;
+						}
+						else if (valueKind == RegistryValueKind.String && regValue.ToString() == "0")
+						{
+							return false;
+						}
+					}
+					return true;
+				}
+
         private static void Login(string userName, string pwd)
         {
             // Put the URL in the original window which starts the new IE window and closes
@@ -276,14 +303,15 @@ namespace InnovatorHelper
             Navigate(InnovatorURL);
 
             // Wait till the original window is closed
-            if (!WaitForOriginalIEClose())
-                return;
+						if (!WaitForOriginalIEClose())
+								return;
 
             browser = null;
             NewIE = false;
             // The property 'get' must find the handle for the Innovator window opened by the original IE window
             if (Browser == null)
                 return;
+
 
             // Wait for the newly opened window to fully load
             WaitForComplete();
